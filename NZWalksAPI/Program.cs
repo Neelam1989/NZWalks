@@ -3,6 +3,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using NZWalksAPI.Data;
+using NZWalksAPI.Repositry;
 using System.Runtime.InteropServices;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,8 @@ builder.Services.AddDbContext<NZWalkDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("NZWalks"));
 });
 
+builder.Services.AddScoped<IRegionRepoistry, RegionRepositry>();
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 var app = builder.Build();
 
